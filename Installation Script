@@ -14,8 +14,6 @@ Step 2: Install Required Packages
 Step 3: Configure MySQL Server
 Step 4: Install CURL, Node, NPM, Yarn
 Step 5: Install Frappe Bench
-Step 6: Install ERPNext and other Apps
-Step 7: Setup Production Server
 
 PRE-REQUISITES:
 Operating System: Linux Ubuntu 22.04 LTS
@@ -123,3 +121,53 @@ After you’re done editing the file hit “Esc + :wq” to save the file
 3.3 Restart the MySQL server (for the config to take effect)
 
 sudo service mysql restart
+
+4.Instal CURL, Node, NPM and Yarn
+4.1 Install CURL
+
+sudo apt install curl
+4.2 Install Node
+
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
+
+source ~/.profile
+
+nvm install 16.15.0
+4.3 Install NPM
+
+sudo apt-get install npm
+4.4 Install Yarn
+
+sudo npm install -g yarn
+
+5.INSTALL FRAPPE BENCH
+5.1 Install Frappe Bench
+
+sudo pip3 install frappe-bench
+Check if Frappe Bench is correctly installed by running bench --version
+
+5.2 Initialize Frappe Bench
+
+bench init --frappe-branch version-14 frappe-bench
+5.3 Go to Frappe Bench directory
+This will be the main directory from where we will be running all the commands.
+The full path of this directory will be: /home/[frappe-user]/frappe-bench/
+
+cd frappe-bench/
+5.4 Change user directory permissions
+This will allow execution permission to the home directory of the frappe user we created in step 1.4
+
+chmod -R o+rx /home/[frappe-user]/
+5.5 Create a New Site
+We will use this as the default site where ERPNext and other apps will be installed.
+
+bench new-site site1.local
+
+bench start
+
+Open the browser and enter localhost:8000
+
+Frappe webpage will appear
+
+
+
