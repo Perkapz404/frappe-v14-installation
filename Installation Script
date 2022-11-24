@@ -163,11 +163,61 @@ We will use this as the default site where ERPNext and other apps will be instal
 
 bench new-site site1.local
 
-bench start
+6. Install ERPNext and other Apps
+Finally, we’re at the last stage of the installation process!
 
-Open the browser and enter localhost:8000
+6.1 Download the necessary apps to our server
+Download the payments apps . This app is required during ERPNext installation
 
-Frappe webpage will appear
+bench get-app payments
+Download the main ERPNext app
 
+bench get-app --branch version-14 erpnext
+Download the HR & Payroll app (optional)
 
+bench get-app hrms
+Download the ecommerce integrations apps (optional)
+
+bench get-app ecommerce_integrations --branch main
+Check if all the apps are correctly downloaded by running bench version --format table
+
+6.2 Install all the Apps
+
+Install the main ERPNext app
+
+bench --site site1.local install-app erpnext
+Install the HR & Payroll app (optional)
+
+bench --site site1.local install-app hrms
+Install the ecommerce integrations apps (optional)
+
+bench --site site1.local install-app ecommerce_integrations
+
+7. SETUP PRODUCTION SERVER
+7.1 Enable scheduler service
+
+bench --site site1.local enable-scheduler
+7.2 Disable maintenance mode
+
+bench --site site1.local set-maintenance-mode off
+7.3 Setup production config
+
+sudo bench setup production [frappe-user]
+7.4 Setup NGINX web server
+
+bench setup nginx
+7.5 Final server setup
+
+sudo supervisorctl restart all
+sudo bench setup production [frappe-user]
+When prompted to save new/existing config files, hit “Y”
+
+Ready to Go!
+
+You can now go to your server [IP-address]:80 and you will have a fresh new installation of ERPNext ready to be configured!
+
+If you are facing any issues with the ports, make sure to enable all the necessary ports on your firewall using the below commands;
+
+sudo ufw allow 22,25,143,80,443,3306,3022,8000/tcp
+sudo ufw enable
 
