@@ -221,3 +221,6 @@ If you are facing any issues with the ports, make sure to enable all the necessa
 sudo ufw allow 22,25,143,80,443,3306,3022,8000/tcp
 sudo ufw enable
 
+
+permission error on file change 
+chmod -R 777 file path
