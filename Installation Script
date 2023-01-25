@@ -224,3 +224,28 @@ sudo ufw enable
 
 permission error on file change 
 chmod -R 777 file path
+
+
+
+If you face "ERROR 2002 (HY000): Can't connect to local server through socket '/run/mysqld/mysqld.sock' (2)" issue on sudo secure installation follow the below process
+###Open the below config file
+nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
+##append the below line in it.
+
+[mysqld]
+innodb-file-format=barracuda
+innodb-file-per-table=1
+innodb-large-prefix=1
+character-set-client-handshake = FALSE
+character-set-server = utf8mb4
+collation-server = utf8mb4_unicode_ci
+
+[mysql]
+default-character-set = utf8mb4
+
+after save do mariadb restart
+
+sudo service restart mariadb
+
+###Then run the same secure installation command
