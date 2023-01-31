@@ -1,0 +1,10 @@
+In New Installation of Frappe, while running bench restart command follow the below setups.
+
+1. chmod -R o+rx /home/{{frappeuser}}
+2. sudo nano /etc/supervisor/supervisord.conf
+(Add these lines under [unix_http_server])
+chmod=0760
+chown={{frappeuser}}:{{frappeuser}}
+sudo -A systemctl restart supervisor
+
+Run bench restart 
