@@ -249,3 +249,25 @@ after save do mariadb restart
 sudo service restart mariadb
 
 ###Then run the same secure installation command
+
+
+####on new site installation if you face below error
+
+MySQL root password: 
+For key collation_server. Expected value utf8mb4_unicode_ci, found value utf8mb4_general_ci
+
+####follow this process to sort
+
+sudo nano /etc/mysql/mariadb.conf.d/50-server.cnf
+
+change this line 
+collation-server      = utf8mb4_general_ci 
+
+TO
+collation-server      = utf8mb4_unicode_ci
+
+then save the editor and restart the service 
+
+bench new-site {{your_site_name}}
+
+site will get install successfully.
