@@ -130,6 +130,13 @@ sudo apt install curl
 
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
 
+###if no response on the curl command then follow the below commands
+
+sudo npm cache clean -f
+sudo npm install -g n
+sudo n stable
+sudo n latest
+
 source ~/.profile
 
 nvm install 16.15.0
