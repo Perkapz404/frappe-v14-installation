@@ -278,3 +278,12 @@ then save the editor and restart the service
 bench new-site {{your_site_name}}
 
 site will get install successfully.
+
+####SSL Error###
+There was a problem trying to setup SSL for your site
+ERROR: Certbot is not installed on your system. Please visit https://certbot.eff.org/instructions for installation instructions, 
+then try again
+
+Solution : 
+sudo snap install --classic certbot
+then try running the same command sudo -H bench setup lets-encrypt {sitename}
